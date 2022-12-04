@@ -13,12 +13,12 @@ This tiny project allows you to build the [Z80 library](https://github.com/redco
 
 The CMake script supports the following potions:
 
-* <span id="option_Z80_LKM_STABLE">**<code>-DLINUX_KERNEL_HEADERS_DIR=<path></code>**</span>  
+* <span id="option_Z80_LKM_STABLE">**`-DLINUX_KERNEL_HEADERS_DIR=<path>`**</span>  
 	Specify the directory of the Linux kernel headers.  
-	If this optionnot defined, the directory will be autodetected.  
+	If this option is not defined, the directory of the kernel headers will be autodetected.  
 	Not defined by default.
 
-* <span id="option_Z80_LKM_STABLE">**<code>-DZ80_LKM_STABLE=(YES|NO)</code>**</span>  
+* <span id="option_Z80_LKM_STABLE">**`-DZ80_LKM_STABLE=(YES|NO)`**</span>  
 	Download the latest stable source code packages of Z80 and Zeta rather than clone the master branch of their respective Git repositories.  
 	The default is `NO`.
 
