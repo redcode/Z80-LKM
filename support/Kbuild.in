@@ -1,0 +1,3 @@
+obj-m := z80.o
+z80-y := @Z80_LKM_SOURCES@
+ccflags-y := -isystem "@Zeta_SOURCE_DIR@/API" -isystem "@Z80_SOURCE_DIR@/API" -DZ80_STATIC

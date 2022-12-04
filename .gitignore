@@ -1,0 +1,5 @@
+.DS_Store
+.directory
+Thumbs.db
+/build/
+/CMakeLists.txt.user
