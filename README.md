@@ -39,7 +39,7 @@ This will generate the `z80.ko` module, which then you can load and unload:
 ```shell
 insmod z80.ko     # Load the module
 dmesg | tail -n 1 # Will print "Zilog Z80 CPU emulator v0.2"
-rmmod z80.ko      # Unload the module
+rmmod z80         # Unload the module
 ```
 
 ## License
