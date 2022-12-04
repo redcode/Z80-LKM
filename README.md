@@ -2,7 +2,7 @@
 
 This tiny project allows you to build the [Z80 library](https://github.com/redcode/Z80) as a Linux kernel module.
 
-# Build
+## Build
 
 ### Prerequisites
 
@@ -11,11 +11,11 @@ This tiny project allows you to build the [Z80 library](https://github.com/redco
 
 ### Configuration options
 
-The CMake script supports the following potions:
+The CMake script supports the following options:
 
 * <span id="option_Z80_LKM_STABLE">**`-DLINUX_KERNEL_HEADERS_DIR=<path>`**</span>  
 	Specify the directory of the Linux kernel headers.  
-	If this option is not defined, the directory of the kernel headers will be autodetected.  
+	If this option is not defined, the directory will be autodetected.  
 	Not defined by default.
 
 * <span id="option_Z80_LKM_STABLE">**`-DZ80_LKM_STABLE=(YES|NO)`**</span>  
@@ -23,6 +23,8 @@ The CMake script supports the following potions:
 	The default is `NO`.
 
 ### Build
+
+Type the following:
 
 ```shell
 git clone https://github.com/redcode/Z80-LKM.git
@@ -32,7 +34,15 @@ cmake .. [options]
 make
 ```
 
-# License
+This will generate the `z80.ko` module, which then you can load and unload:
+
+```shell
+insmod z80.ko     # Load the module
+dmesg | tail -n 1 # Will print "Zilog Z80 CPU emulator v0.2"
+rmmod z80.ko      # Unload the module
+```
+
+## License
 
 <img src="https://www.gnu.org/graphics/gplv3-127x51.png" align="right">
 
