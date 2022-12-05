@@ -1,7 +1,7 @@
 <h1><b>Z80-LKM</b></h1>
 <p>
-	<a href="https://github.com/redcode/Z80/actions/workflows/build_kernel_module.yml">
-		<img src="https://github.com/redcode/Z80/actions/workflows/build_kernel_module.yml/badge.svg">
+	<a href="https://github.com/redcode/Z80-LKM/actions/workflows/build_kernel_module.yml">
+		<img src="https://github.com/redcode/Z80-LKM/actions/workflows/build_kernel_module.yml/badge.svg">
 	</a>
 	<a href="https://discord.gg/zU4dkzp8Mv">
 		<img alt="Discord" src="https://img.shields.io/discord/848534208129138738?color=5865F2&label=Discord&logo=discord&logoColor=white"/>
