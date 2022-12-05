@@ -9,17 +9,25 @@
 
 cmake_minimum_required(VERSION 3.11)
 
+if(	CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR AND
+	NOT CMAKE_BUILD_TYPE				   AND
+	NOT CMAKE_CONFIGURATION_TYPES
+)
+	set(CMAKE_BUILD_TYPE Release)
+endif()
+
 project(Z80-LKM
 	LANGUAGES C
 	DESCRIPTION "Z80 emulator for Linux")
+
+set(LINUX_KERNEL_HEADERS_DIR
+"" CACHE STRING
+"Directory of the Linux kernel headers.")
 
 option(Z80_LKM_STABLE
 "Download the latest stable versions of Z80 and Zeta rather than clone their \
 Git repositories."
 NO)
-
-set(LINUX_KERNEL_HEADERS_DIR "" CACHE STRING
-"Path to the kernel headers directory")
 
 if(LINUX_KERNEL_HEADERS_DIR STREQUAL "")
 	execute_process(
