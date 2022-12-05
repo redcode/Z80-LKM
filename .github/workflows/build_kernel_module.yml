@@ -38,4 +38,5 @@ jobs:
         -DZ80_LKM_STABLE=${{env.Z80_LKM_STABLE}}
 
     - name: Build
-      run: cmake --build ${{github.workspace}}/build --config ${{env.CMAKE_BUILD_TYPE}}
+      working-directory: ${{github.workspace}}/build
+      run: cmake --build . --config ${{env.CMAKE_BUILD_TYPE}}
