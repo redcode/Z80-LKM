@@ -90,6 +90,7 @@ add_custom_command(
 	OUTPUT	"${CMAKE_CURRENT_BINARY_DIR}/Z80.o_shipped"
 		"${CMAKE_CURRENT_BINARY_DIR}/Z80-LKM.c"
 	COMMAND cp "$<TARGET_OBJECTS:Z80>" "${CMAKE_CURRENT_BINARY_DIR}/Z80.o_shipped" &&
+		touch "${CMAKE_CURRENT_BINARY_DIR}/.Z80.o.cmd" &&
 		cp "${CMAKE_CURRENT_SOURCE_DIR}/sources/Z80-LKM.c" "${CMAKE_CURRENT_BINARY_DIR}/Z80-LKM.c"
 	DEPENDS Z80)
 
@@ -116,5 +117,10 @@ add_custom_command(
 
 add_custom_target(module ALL DEPENDS z80.ko)
 add_custom_target(module_clean COMMAND ${_kbuild_command} clean)
+
+add_custom_target(
+	mrproper
+	COMMAND ${_kbuild_command} clean &&
+		${CMAKE_MAKE_PROGRAM} clean)
 
 # CMakeLists.txt EOF
