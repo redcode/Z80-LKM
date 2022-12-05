@@ -1,0 +1,41 @@
+name: Build kernel module
+
+on:
+  push:
+    paths:
+    - '.github/workflows/build_kernel_module.yml'
+    - 'sources/*.c'
+    - 'support/Kbuild.in'
+    - 'CMakeLists.txt'
+  pull_request:
+    paths:
+    - '.github/workflows/build_kernel_module.yml'
+    - 'sources/*.c'
+    - 'support/Kbuild.in'
+    - 'CMakeLists.txt'
+
+env:
+  CMAKE_BUILD_TYPE: Release
+  CMAKE_VERBOSE_MAKEFILE: YES
+  Z80_LKM_STABLE: YES
+
+jobs:
+  build_kernel_module:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get -y install linux-headers-$(uname -r)
+
+    - name: Configure CMake
+      run: >
+        cmake -B ${{github.workspace}}/build
+        -DCMAKE_BUILD_TYPE=${{env.CMAKE_BUILD_TYPE}}
+        -DCMAKE_VERBOSE_MAKEFILE=${{env.CMAKE_VERBOSE_MAKEFILE}}
+        -DZ80_LKM_STABLE=${{env.Z80_LKM_STABLE}}
+
+    - name: Build
+      run: cmake --build ${{github.workspace}}/build --config ${{env.CMAKE_BUILD_TYPE}}
