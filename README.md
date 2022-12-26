@@ -27,7 +27,7 @@ The CMake script supports the following options:
 	Not defined by default.
 
 * <span id="option_Z80_LKM_STABLE">**`-DZ80_LKM_STABLE=(YES|NO)`**</span>  
-	Download the source code packages of the stable versions of Z80 and Zeta instead of cloning the master branch from their respective Git repositories.  
+	Download the source code packages of the stable versions of Z80 and Zeta instead of cloning the `master` branch from their respective Git repositories.  
 	The default is `NO`.
 
 ### Build
