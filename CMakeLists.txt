@@ -30,8 +30,7 @@ Git repositories."
 NO)
 
 if(LINUX_KERNEL_HEADERS_DIR STREQUAL "")
-	execute_process(
-		COMMAND uname -r
+	execute_process(COMMAND uname -r
 		OUTPUT_VARIABLE _uname_r
 		OUTPUT_STRIP_TRAILING_WHITESPACE)
 
@@ -47,7 +46,7 @@ if(LINUX_KERNEL_HEADERS_DIR STREQUAL "")
 		set(LINUX_KERNEL_HEADERS_DIR "${_kernel_headers_dir}")
 
 		message(STATUS
-		"Found Linux kernel headers: ${LINUX_KERNEL_HEADERS_DIR} (found version \"${_uname_r}\")")
+			"Found Linux kernel headers: ${LINUX_KERNEL_HEADERS_DIR} (found version \"${_uname_r}\")")
 	endif()
 
 	unset(_uname_r)
@@ -56,24 +55,11 @@ endif()
 include(FetchContent)
 
 if(${PROJECT_NAME}_STABLE)
-	FetchContent_Declare(
-		Zeta
-		URL https://zeta.st/download/Zeta-latest.tar.xz
-		DOWNLOAD_EXTRACT_TIMESTAMP YES)
-
-	FetchContent_Declare(
-		Z80
-		URL https://zxe.io/software/Z80/download/Z80-latest.tar.xz
-		DOWNLOAD_EXTRACT_TIMESTAMP YES)
-
+	FetchContent_Declare(Zeta URL https://zeta.st/download/Zeta-latest.tar.xz)
+	FetchContent_Declare(Z80  URL https://zxe.io/software/Z80/download/Z80-latest.tar.xz)
 else()
-	FetchContent_Declare(
-		Zeta
-		GIT_REPOSITORY https://github.com/redcode/Zeta.git)
-
-	FetchContent_Declare(
-		Z80
-		GIT_REPOSITORY https://github.com/redcode/Z80.git )
+	FetchContent_Declare(Zeta GIT_REPOSITORY https://github.com/redcode/Zeta.git)
+	FetchContent_Declare(Z80  GIT_REPOSITORY https://github.com/redcode/Z80.git )
 endif()
 
 FetchContent_MakeAvailable(Zeta)
@@ -94,9 +80,7 @@ add_custom_command(
 		cp "${CMAKE_CURRENT_SOURCE_DIR}/sources/Z80-LKM.c" "${CMAKE_CURRENT_BINARY_DIR}/Z80-LKM.c"
 	DEPENDS Z80)
 
-add_custom_target(copy_files
-	DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/Z80.o_shipped")
-
+add_custom_target(copy_files DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/Z80.o_shipped")
 set(Z80_LKM_SOURCES "Z80-LKM.o Z80.o")
 
 configure_file(
@@ -104,10 +88,7 @@ configure_file(
 	"${CMAKE_CURRENT_BINARY_DIR}/Kbuild"
 	@ONLY)
 
-set(	_kbuild_command
-	${CMAKE_MAKE_PROGRAM}
-	-C ${LINUX_KERNEL_HEADERS_DIR}
-	M=${CMAKE_CURRENT_BINARY_DIR})
+set(_kbuild_command ${CMAKE_MAKE_PROGRAM} -C ${LINUX_KERNEL_HEADERS_DIR} M=${CMAKE_CURRENT_BINARY_DIR})
 
 add_custom_command(
 	OUTPUT z80.ko
@@ -117,10 +98,6 @@ add_custom_command(
 
 add_custom_target(module ALL DEPENDS z80.ko)
 add_custom_target(module_clean COMMAND ${_kbuild_command} clean)
-
-add_custom_target(
-	mrproper
-	COMMAND ${_kbuild_command} clean &&
-		${CMAKE_MAKE_PROGRAM} clean)
+add_custom_target(mrproper COMMAND ${_kbuild_command} clean && ${CMAKE_MAKE_PROGRAM} clean)
 
 # CMakeLists.txt EOF
